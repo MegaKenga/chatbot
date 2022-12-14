@@ -1,15 +1,10 @@
 from config import TOKEN_API
 from aiogram import Dispatcher, executor, Bot, types
 from stickers import *
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+
 
 bot = Bot(TOKEN_API)
 dp = Dispatcher(bot)
-
-kb = ReplyKeyboardMarkup(resize_keyboard=True,
-                        one_time_keyboard=True)
-button_love_sticker = KeyboardButton('/Get_love_sticker')
-kb.add(button_love_sticker)
 
 
 HELP_COMMANDS = """
@@ -23,8 +18,7 @@ async def on_startup(_):
 async def start_chat(message: types.Message):
     await message.answer('Смотри, что я умею!')
     await bot.send_message(chat_id=message.chat.id,
-                            text = HELP_COMMANDS,
-                            reply_markup=kb)
+                            text = HELP_COMMANDS)
 
 @dp.message_handler(commands = ['Get_love_sticker'])
 async def send_sticker(message: types.Message):
@@ -42,4 +36,3 @@ async def echo(message: types.Message):
 
 if __name__ == '__main__':
     executor.start_polling(dp, on_startup = on_startup, skip_updates=True)
-sdfsdfsf
